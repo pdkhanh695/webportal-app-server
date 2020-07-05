@@ -45,5 +45,4 @@ phases:
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - printf '[{"name":"webportal-server-image","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
-  files:
-    files: imagedefinitions.json
+  files: imagedefinitions.json
