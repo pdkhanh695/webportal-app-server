@@ -23,9 +23,9 @@ phases:
       - echo Logging in to Amazon ECR...
       #- $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
       - $(aws ecr get-login --no-include-email --region ap-southeast-1)
-      - REPOSITORY_URI = 019614656427.dkr.ecr.ap-southeast-1.amazonaws.com/webportal-server-image
-      - COMMIT_HASH = $(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG =  ${COMMIT_HASH:=latest}
+      - REPOSITORY_URI=019614656427.dkr.ecr.ap-southeast-1.amazonaws.com/webportal-server-image
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     run-as: root
     commands:
