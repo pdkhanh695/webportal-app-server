@@ -1,15 +1,16 @@
 version: 0.0
-os: linux
-files:
-  - source: /
-    destination: /home/ec2-user/webportal-app-server
-hooks:
-  BeforeInstall:
-    - location: scripts/install_dependencies.sh
-      timeout: 30000
-      runas: root
-
-  ApplicationStart:
-    - location: scripts/start_server.sh
-      timeout: 300
-      runas: root
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:ap-southeast-1:019614656427:task-definition/webportal-task:1"
+        LoadBalancerInfo:
+          ContainerName: "webportal-container"
+          ContainerPort: 80
+        # Optional properties
+        PlatformVersion: "LATEST"
+        NetworkConfiguration:
+            AwsvpcConfiguration:
+              Subnets: ["subnet-143cc372", "subnet-5c997614"]
+              SecurityGroups: ["sg-01fbf14f410e33e47"]
+              AssignPublicIp: "ENABLED"
